@@ -1,73 +1,52 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        blog
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div class="wrapper-content wrapper-content--fixed">
+    <promo />
+    <Intro title="My lasts posts: " />
+    <PostsList :posts="postsLoaded" />
+    <contacts />
   </div>
 </template>
 
 <script>
-export default {}
+import promo from '@/components/Promo.vue'
+import contacts from '@/components/Contacts.vue'
+export default {
+  components: {
+    promo,
+    contacts
+  },
+//   asyncData(contex) {
+// return new Promise((resolve, reject)=>{
+//  setTimeout(()=>{
+// resolve({
+//       postsLoaded: [
+//                  {
+//            id: 1,
+//            title: '1 post',
+//            descr: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+//            img: 'https://lawnuk.com/wp-content/uploads/2016/08/sprogs-dogs.jpg'
+
+//          }
+//               ]
+// })},1500) })
+// .then(data =>{
+// return data
+// })
+// .catch(e => {
+//   contex.error(e)
+// })
+//   },
+  // data() {
+  //   return {
+  //     posts: []
+  //   }
+  // },
+  computed: {
+    postsLoaded () {
+      return this.$store.getters.getPostsLoaded
+    }
+  }
+
+}
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
