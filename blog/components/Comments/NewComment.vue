@@ -23,6 +23,7 @@
 
 <script>
 
+
 export default {
     data() {
         return{
@@ -37,10 +38,20 @@ export default {
 
     methods: {
         onSubmit() {
-            this.message = 'Submited!'
-            // Reset
-            this.comment.name  = '',
-            this.comment.text = ''
+            this.$store.dispatch('addComment', {
+                postId: '',
+                publish: false,
+                ...this.comment,
+
+            })
+            .then(() => {
+                this.message = 'Submited!'
+                // Reset
+                this.comment.name  = '',
+                this.comment.text = ''
+                })
+                .catch(e =>  {console.log(e)})
+
             console.log(this.comment)
         }
     }
