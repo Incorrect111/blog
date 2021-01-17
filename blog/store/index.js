@@ -20,6 +20,9 @@ export const mutations = {
     addComment(state, comment) {
         console.log(comment)
         state.commentsLoaded.push(comment)
+    },
+    setToken(state, idToken) {
+
     }
 }
 
@@ -36,9 +39,19 @@ export const actions = {
             })
             .catch(e => console.log(e))
     },
+    authUser({ commit }, user) {
+        const key = 'AIzaSyAf3kjVGrJeJHeydvSZp1mO6hhh4_UZorw'
+
+        return axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`, {
+                email: user.email,
+                password: user.password,
+                returnSecureToken: true
+            }).then((res) => { commit('setToken', res.data.idToken) })
+            .catch(e => { console.log(e) })
+    },
     addPost({ commit }, post) {
         // console.log(post)
-        return axios.post('https://blog-nuxt-78497-default-rtdb.firebaseio.com/posts.json', post)
+        return axios.post('https://blog)-nuxt-78497-default-rtdb.firebaseio.com/posts.json', post)
             .then(res => {
                 // console.log(res)
                 commit('addPost', {...post, id: res.data.name })

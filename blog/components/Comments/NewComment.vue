@@ -25,6 +25,12 @@
 
 
 export default {
+    props: {
+        postId: {
+            type: String,
+            required: true
+        }
+    },
     data() {
         return{
             comment: {
@@ -39,7 +45,7 @@ export default {
     methods: {
         onSubmit() {
             this.$store.dispatch('addComment', {
-                postId: '',
+                postId: this.postId,
                 publish: false,
                 ...this.comment,
 

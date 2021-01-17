@@ -2,7 +2,11 @@
   <div class="wrapper-content wrapper-content--fixed">
     <post :post="post" />
     <comments :comments='comments' />
-      <newComment />
+<!-- 
+    <p>
+      {{ comments }}
+    </p> -->
+      <newComment :postId="$route.params.id" />
   </div>
 </template>
 
@@ -24,35 +28,25 @@ export default {
       axios.get(`https://blog-nuxt-78497-default-rtdb.firebaseio.com/posts/${context.params.id}.json`),
       axios.get(`https://blog-nuxt-78497-default-rtdb.firebaseio.com/comments.json`)
     ])
+    // let commentsArray = [],
+    //     commentsArrayRes = []
+
+    //     Object.keys(comments.data).forEach(key => {
+    //       commentsArray.push(comments.data[key])
+    //     })
+
+    //     for(let i=0; i < commentsArray.length; i++){
+    //       if (commentsArray[i].postId === context.params.id && commentsArray[i].publish === true) {
+    //         commentsArrayRes.push(commentsArray[i])
+    //       }
+    //     }
+
+      let commentsArrayRes = Object.values(comments.data).filter(comment => (comment.postId === context.params.id) && comment.publish)
       return {
         post: post.data,
-        comments: comments.data
+        comments: commentsArrayRes
       }
   }
-  // data() {
-  //   return {
-  //     post: {
-  //       id: 1,
-  //       title: "1 post",
-  //       content: 'Excepteur sint occaecat cupidatat non proident,Excepteur sint occaecat cupidatat non proident,Excepteur sint occaecat cupidatat non proident,Excepteur sint occaecat cupidatat non proident,Excepteur sint occaecat cupidatat non proident',
-  //       descr:"Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-  //       img: "https://lawnuk.com/wp-content/uploads/2016/08/sprogs-dogs.jpg"
-  //     },
-
-  //     comments: [
-  //       {
-  //         name: 'Alex',
-  //         text: 'lalalal'
-  //       },
-
-  //       {
-  //         name: 'Andrey',
-  //         text: 'oyoyoy'
-  //       }
-
-  //     ]
-  //   };
-  // }
 };
 </script>
 
