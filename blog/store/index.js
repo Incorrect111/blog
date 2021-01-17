@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const state = () => ({
     postsLoaded: [],
-    commentsLoaded: []
+    idToken: null,
 })
 
 export const mutations = {
@@ -17,12 +17,8 @@ export const mutations = {
         const postIndex = state.postsLoaded.findIndex(post => post.id === postEdit.id)
         state.postsLoaded[postIndex] = postEdit
     },
-    addComment(state, comment) {
-        console.log(comment)
-        state.commentsLoaded.push(comment)
-    },
     setToken(state, idToken) {
-
+        state.idToken = idToken
     }
 }
 
@@ -58,8 +54,8 @@ export const actions = {
             })
             .catch(e => console.log(e))
     },
-    editPost({ commit }, post) {
-        return axios.put(`https://blog-nuxt-78497-default-rtdb.firebaseio.com/posts/${post.id}.json`, post)
+    editPost({ commit, state }, post) {
+        return axios.put(`https://blog-nuxt-78497-default-rtdb.firebaseio.com/posts/${post.id}.json?auth=${state.idToken}`, post)
             .then(res => {
                 commit('editPost', post)
             })
@@ -67,10 +63,6 @@ export const actions = {
     },
     addComment({ commit }, comment) {
         return axios.post('https://blog-nuxt-78497-default-rtdb.firebaseio.com/comments.json', comment)
-            .then(res => {
-                // console.log(res)
-                commit('addComment', {...comment, id: res.data.name })
-            })
             .catch(e => console.log(e))
     }
 }
@@ -78,5 +70,8 @@ export const actions = {
 export const getters = {
     getPostsLoaded(state) {
         return state.postsLoaded
+    },
+    checkAuthUser(state) {
+        return state.idToken != null
     }
 }
