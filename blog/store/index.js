@@ -19,6 +19,9 @@ export const mutations = {
     },
     setToken(state, idToken) {
         state.idToken = idToken
+    },
+    destroyToken(state) {
+        state.idToken = null
     }
 }
 
@@ -44,6 +47,9 @@ export const actions = {
                 returnSecureToken: true
             }).then((res) => { commit('setToken', res.data.idToken) })
             .catch(e => { console.log(e) })
+    },
+    logoutUser({ commit }) {
+        commit('destroyToken')
     },
     addPost({ commit }, post) {
         // console.log(post)
