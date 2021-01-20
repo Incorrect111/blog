@@ -11,7 +11,20 @@
 
 
 export default {
-  components: {
+  head () {
+    let title = 'My blog SSR',
+        descr = 'My blog With Nuxt js!',
+        type = 'site'
+    return {
+      title: title,
+
+      meta: [
+        { title: "og:title",name: 'og:title',content: title },
+        { hid: "description",name: 'description',content: descr },
+        { hid: "og:description",name: 'og:description',content: descr },
+        { hid: "og:type",name: 'og:type',content: type },
+      ]
+    }
   },
  computed: {
     postsLoaded () {

@@ -15,32 +15,21 @@ export default {
     promo,
     contacts
   },
-//   asyncData(contex) {
-// return new Promise((resolve, reject)=>{
-//  setTimeout(()=>{
-// resolve({
-//       postsLoaded: [
-//                  {
-//            id: 1,
-//            title: '1 post',
-//            descr: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-//            img: 'https://lawnuk.com/wp-content/uploads/2016/08/sprogs-dogs.jpg'
+  head () {
+    let title = 'My blog',
+        descr = 'My blog With Nuxt js!',
+        type = 'site'
+    return {
+      title: title,
 
-//          }
-//               ]
-// })},1500) })
-// .then(data =>{
-// return data
-// })
-// .catch(e => {
-//   contex.error(e)
-// })
-//   },
-  // data() {
-  //   return {
-  //     posts: []
-  //   }
-  // },
+      meta: [
+        { title: "og:title",name: 'og:title',content: title },
+        { hid: "description",name: 'description',content: descr },
+        { hid: "og:description",name: 'og:description',content: descr },
+        { hid: "og:type",name: 'og:type',content: type },
+      ]
+    }
+  },
   computed: {
     postsLoaded () {
       return this.$store.getters.getPostsLoaded

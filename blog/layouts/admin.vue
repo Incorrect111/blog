@@ -1,4 +1,5 @@
 <template>
+<no-ssr>
   <div class="wrapper">
     <Header />
     <!-- Content -->
@@ -12,6 +13,7 @@
       <Nuxt />
     </div>
   </div>
+  </no-ssr>
 </template>
 <script>
 import Header from "@/components/system/Header.vue";
