@@ -8,9 +8,10 @@ export const state = () => ({
 export const mutations = {
     setPosts(state, postsArray) {
         state.postsLoaded = postsArray
+            // console.log('work')
     },
     addPost(state, post) {
-        console.log(post)
+        console.log('addPost mutation')
         state.postsLoaded.push(post)
     },
     editPost(state, postEdit) {
@@ -29,6 +30,7 @@ export const actions = {
     nuxtServerInit({ commit }, contex) {
         return axios.get('https://blog-nuxt-78497-default-rtdb.firebaseio.com/posts.json')
             .then(res => {
+                console.log(res)
                 const postsArray = []
                 for (let key in res.data) {
                     postsArray.push({...res.data[key], id: key })
@@ -52,10 +54,10 @@ export const actions = {
         commit('destroyToken')
     },
     addPost({ commit }, post) {
-        // console.log(post)
+        console.log('Post :', post)
         return axios.post('https://blog)-nuxt-78497-default-rtdb.firebaseio.com/posts.json', post)
             .then(res => {
-                // console.log(res)
+                // console.log('addPost')
                 commit('addPost', {...post, id: res.data.name })
             })
             .catch(e => console.log(e))

@@ -1,4 +1,4 @@
-User-agent: *
+dUser-agent: *
 Disallow: /admin/
 Disallow: /*.pdf
 Disallow: /*.doc

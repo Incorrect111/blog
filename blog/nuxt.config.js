@@ -1,3 +1,6 @@
+import axios from 'axios'
+import pkg from './package'
+
 export default {
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
@@ -29,8 +32,53 @@ export default {
     buildModules: [],
 
     // Modules (https://go.nuxtjs.dev/config-modules)
-    modules: [],
+    modules: [
+        // ['@nuxtjs/google-analytics', {
+        //     id: 'UA-KEY'
+        // }],
+        // ['@nuxtjs/yandex-metrika', {
+        //     id: 'KEY',
+        //     webvisor: false,
+        //     clickmap: true,
+        //     trackLinks: true
+        // }],
+    ],
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
-    build: {}
+    build: {
+        vendor: ['vue', 'axios']
+    },
+    // generate: {
+    //     routes() {
+    //         return axios.get('https://blog-nuxt-78497-default-rtdb.firebaseio.com/posts.json')
+    //             .then(res => {
+
+    //                 const postsArray = []
+    //                 for (let key in res.data) {
+    //                     postsArray.push({...res.data[key], id: key })
+    //                 }
+    //                 return postsArray.map(post => {
+    //                     return '/blog/' + post.id
+    //                 })
+    //             })
+    //     }
+    // },
+    // target: 'static'
+    generate: {
+        routes: function() {
+            return axios.get('https://blog-nuxt-78497-default-rtdb.firebaseio.com/posts.json')
+                .then((res) => {
+
+                    //Get id
+                    const postsArray = []
+                    for (let key in res.data) {
+                        postsArray.push({...res.data[key], id: key })
+                    }
+                    //Routes
+                    return postsArray.map((post) => {
+                        return '/blog/' + post.id
+                    })
+                })
+        }
+    }
 }

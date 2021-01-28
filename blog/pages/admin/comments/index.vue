@@ -44,7 +44,7 @@ export default {
                     const comment = res.data[key]
                     commentsArray.push({ ...comment  , id: key })
                   })
-                  // console.log(commentsArray)
+                  console.log(commentsArray)
                   this.comments = commentsArray;
                 }))
         },
