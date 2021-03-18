@@ -1,9 +1,9 @@
 <template>
     <section v-if="comments" class="comments">
         <div class="container">
-            <h2>Comments:</h2>
-            <p v-if="comments.length === 0">Comments: 0</p>
-            <div class="comment" v-for="comment in comments" :key="comment.name">
+            <h2>Comments: {{comments.length }}</h2>
+            <!-- <p v-if="comments.length === 0">Comments: 0</p> -->
+            <div class="comment" v-for="comment in comments" :key="comment.id">
                 <p class="name"> {{ comment.name }} </p>
                 <p class="text">{{ comment.text }} </p>
 

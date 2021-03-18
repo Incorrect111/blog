@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-content wrapper-content--fixed">
     <post :post="post" />
-    <comments :comments='comments' />
+    <comments :comments="comments" />
 <!-- 
     <p>
       {{ comments }}
@@ -45,24 +45,29 @@ export default {
       axios.get(`https://blog-nuxt-78497-default-rtdb.firebaseio.com/posts/${context.params.id}.json`),
       axios.get(`https://blog-nuxt-78497-default-rtdb.firebaseio.com/comments.json`)
     ])
-    // let commentsArray = [],
-    //     commentsArrayRes = []
+    let commentsArray = [],
+        commentsArrayRes = []
 
-    //     Object.keys(comments.data).forEach(key => {
-    //       commentsArray.push(comments.data[key])
-    //     })
+        // Object.keys(comments.data).forEach(key => {
+        //   commentsArray.push(comments.data[key])
+        // })
+        // if (commentsArray.length >0 ) {
+        // for(let i=0; i < commentsArray.length; i++){
+        //   if (commentsArray[i].postId === context.params.id && commentsArray[i].publish === true) {
+        //     commentsArrayRes.push(commentsArray[i])
+        //   }
+        // }
+ 
 
-    //     for(let i=0; i < commentsArray.length; i++){
-    //       if (commentsArray[i].postId === context.params.id && commentsArray[i].publish === true) {
-    //         commentsArrayRes.push(commentsArray[i])
-    //       }
-    //     }
-
-      let commentsArrayRes = Object.values(comments.data).filter(comment => (comment.postId === context.params.id) && comment.publish)
+    //   // let commentsArrayRes = [];
+        if(commentsArray) {
+        commentsArrayRes =  Object.values(comments.data).filter(comment => (comment.postId === context.params.id) && comment.publish)
+    }
       return {
         post: post.data,
         comments: commentsArrayRes
-      }
+        }
+      // } else return false
   }
 };
 </script>

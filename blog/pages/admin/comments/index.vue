@@ -36,6 +36,7 @@ export default {
   },
       methods: {
       loadComments() {
+        console.log('Load comments method!')
             axios
               .get('https://blog-nuxt-78497-default-rtdb.firebaseio.com/comments.json')
                 .then((res => {
@@ -44,7 +45,7 @@ export default {
                     const comment = res.data[key]
                     commentsArray.push({ ...comment  , id: key })
                   })
-                  console.log(commentsArray)
+                  console.log('Array comments: ', commentsArray)
                   this.comments = commentsArray;
                 }))
         },

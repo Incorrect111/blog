@@ -47,11 +47,22 @@ export const actions = {
                 email: user.email,
                 password: user.password,
                 returnSecureToken: true
-            }).then((res) => { commit('setToken', res.data.idToken) })
+            }).then((res) => {
+                let token = res.data.idToken
+                commit('setToken', token)
+            })
             .catch(e => { console.log(e) })
+    },
+    initAuth({ commit }) {
+        let token = localStorage.getItem('token')
+        if (!token) {
+            return false
+        }
+        commit('setToken', token)
     },
     logoutUser({ commit }) {
         commit('destroyToken')
+        localStorage.removeItem('token')
     },
     addPost({ commit }, post) {
         console.log('Post :', post)
