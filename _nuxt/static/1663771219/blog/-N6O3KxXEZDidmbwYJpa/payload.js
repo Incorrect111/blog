@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/blog/-N6O3KxXEZDidmbwYJpa", {data:[{post:{content:"Html + Css",descr:"About Html and Css",id:"-N6O3KxXEZDidmbwYJpa",img:"\u002Fimg\u002Fposts\u002Fhtml+css.jpeg",link:"https:\u002F\u002Fhtml.spec.whatwg.org\u002Fmultipage\u002F",title:"My third Post"},comments:[]}],fetch:{},mutations:[]});

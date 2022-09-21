@@ -1,0 +1,20 @@
+dUser-agent: *
+Disallow: /admin/
+Disallow: /*.pdf
+Disallow: /*.doc
+Disallow: /*?*
+Sitemap: http://localhost:3000/sitemap.xml
+
+User-agent: Googlebot
+Disallow: /admin/
+Disallow: /*.pdf
+Disallow: /*.doc
+Disallow: /*?*
+
+User-agent: Yandex
+Disallow: /admin/
+Disallow: /*.pdf
+Disallow: /*.doc
+Disallow: /*?*
+Host: http://localhost:3000/
+Sitemap: http://localhost:3000/sitemap.xml
